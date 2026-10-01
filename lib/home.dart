@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 class homePage extends StatelessWidget {
   const homePage({super.key});
 
-  List<Card> _buildGridCards(int count) {
+  List<Card> _buildGridCards(BuildContext context, int count) {
+    final ThemeData theme = Theme.of(context);
     List<Card> cards = List.generate(count, (int index) {
       return Card(
         clipBehavior: Clip.antiAlias,
+        elevation: 0.0,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -18,15 +20,18 @@ class homePage extends StatelessWidget {
                 color: Colors.black,
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(16.0, 12.0, 16.0, 8.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: const <Widget>[
-                  Text('Title'),
-                  SizedBox(height: 8.0),
-                  Text('Secondary Text'),
-                ],
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(16.0, 12.0, 16.0, 8.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Text('Title', style: theme.textTheme.titleLarge),
+                    SizedBox(height: 8.0),
+                    Text('Secondary Text', style: theme.textTheme.bodySmall),
+                  ],
+                ),
               ),
             ),
           ],
@@ -68,7 +73,7 @@ class homePage extends StatelessWidget {
         crossAxisCount: 2,
         padding: const EdgeInsets.all(16.0),
         childAspectRatio: 8.0 / 9.0,
-        children: _buildGridCards(10),
+        children: _buildGridCards(context, 10),
       ),
       resizeToAvoidBottomInset: false,
     );
